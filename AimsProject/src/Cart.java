@@ -1,26 +1,68 @@
 import java.util.Arrays;
 import java.util.Comparator;
-
+import java.util.ArrayList;
+import java.util.Scanner;
 public class Cart {
 	// số lượng các đơn hàng tối đa có thể ordered
 	public static final int MAX_NUMBER_ORDERED = 20;
 	// mảng chứa các dvd
 	private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc [MAX_NUMBER_ORDERED];
+	ArrayList<DigitalVideoDisc> list_items = new ArrayList<DigitalVideoDisc>(Arrays.asList(itemsOrdered));
 	// số lượng các đơn hàng trong giỏ hàng hiện tại
 	private int qtyOrdered = 0 ;
 	// tổng giá trị các đơn hàng hiện tại
 	private float total = 0;
 	// Thêm một dvd vào giỏ hàng
 	public void addDigitalVideoDisc (DigitalVideoDisc disc) {
-		// kiểm tra nếu số đơn hàng trong giỏ hàng hiện tại nhỏ hơn lượng tối đa các đơn hàng 
-		// thì thêm vào mảng các dvd
 		if(qtyOrdered < MAX_NUMBER_ORDERED) {
 			itemsOrdered[qtyOrdered] = disc;
 			System.out.println("The disc has been added");
 			qtyOrdered ++;
 		}else {
-			// hiện thông báo giỏ hàng đã đầy
 			System.out.println("The cart is almost full");
+		}
+	}
+	// This method will add a list of DVDs to the current cart 
+	public void addDigitalVideoDisc (DigitalVideoDisc [] dvdlist) {
+		for(int i = 0; i < dvdlist.length ; i++) {
+			if(qtyOrdered + 1 > MAX_NUMBER_ORDERED ) {
+				System.out.println("The cart is almost full");
+				break;
+			}else {
+				itemsOrdered[qtyOrdered] = dvdlist[i];
+				System.out.println("The disc has been added");
+				qtyOrdered ++;
+			}
+		}
+	}
+	// A method addDigitalVideoDisc which allows to pass an arbitrary number of arguments for dvd. 
+	public void addDigitalVideoDisc(DigitalVideoDisc dvd, DigitalVideoDisc...dvds) {
+		addDigitalVideoDisc(dvd);
+		System.out.println("The disc has been added");
+		qtyOrdered++;
+		for(int i = 0 ; i < dvds.length ; i++) {		
+			if(qtyOrdered + 1 > MAX_NUMBER_ORDERED) {
+				System.out.println("The cart is almost full");
+				break;
+			}
+			else {
+				itemsOrdered[qtyOrdered] = dvds[i];
+				qtyOrdered++;	
+				System.out.println("The disc has been added");
+				}
+			}
+		}
+	// The signature of this method has two parameters as following:
+	public void addDigitalVideoDisc(DigitalVideoDisc dvd1 ,DigitalVideoDisc dvd2) {
+		if(qtyOrdered > MAX_NUMBER_ORDERED) {
+			System.out.println("The cart is almost full");
+		}else {
+			itemsOrdered[qtyOrdered] = dvd1;
+			qtyOrdered++;	
+			System.out.println("The disc has been added");
+			itemsOrdered[qtyOrdered] = dvd2;
+			qtyOrdered++;	
+			System.out.println("The disc has been added");	
 		}
 	}
 	// Tính tổng giá trị của giỏ hàng
@@ -30,6 +72,7 @@ public class Cart {
 		}
 		return total;
 	}
+	
 	// xóa bỏ 1 dvd ra khỏi giỏ hàng
 	public void removeDigitalVideoDisc (DigitalVideoDisc disc) {
 		// vị trí của dvd cần xóa 
@@ -150,5 +193,58 @@ public class Cart {
 	    // Cập nhật số lượng đối tượng trong giỏ hàng
 	    qtyOrdered = count;
 	}
-
+	// Phương thức print - in ra màn hình theo yêu cầu
+	public void print() {
+		System.out.println("***********************CART***********************");
+		for(int i = 0 ; i < list_items.size() ; i++) {
+			if(list_items.get(i) == null) {
+				list_items.remove(i);
+			}else {
+				System.out.println(list_items.get(i));
+			}
+		}
+		System.out.println("Total cost: " + totalCost() + "$");
+		System.out.println("***************************************************");
+	}
+	
+	//Phương thức tìm kiếm theo ID và display the search results
+	public void searchByID() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter ID for search: ");
+		int x = sc.nextInt();
+		boolean check = false;	
+		for( int i = 0 ; i < list_items.size() ; i++) {	
+			if(list_items.get(i) == null) {
+				list_items.remove(i);
+			}else {
+				if(list_items.get(i).getId() == x) {
+					System.out.println(list_items.get(i));
+					check = true;
+					break;
+				}
+			}
+		}
+		if(check == false) {
+			System.out.println("No match is found");
+		}	
+	}
+	// Phương thức tìm kiếm theo title
+	public void isMatchByTitle(String title) {
+		boolean check = false;
+		
+		for( int i = 0 ; i < list_items.size() ; i++) {	
+			if(list_items.get(i) == null) {
+				list_items.remove(i);
+			}else {
+				if(title.equals(list_items.get(i).getTitle())) {
+					System.out.println(list_items.get(i));
+					check = true;
+					break;
+				}
+			}
+		}
+		if(check == false) {
+			System.out.println("No match is found");
+		}
+	}
 }

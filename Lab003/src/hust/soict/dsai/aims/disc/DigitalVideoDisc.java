@@ -1,3 +1,5 @@
+package hust.soict.dsai.aims.disc;
+
 
 public class DigitalVideoDisc{
 	// các thuộc tính có trong một lớp dvd

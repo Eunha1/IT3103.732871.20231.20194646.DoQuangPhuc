@@ -1,5 +1,7 @@
+package hust.soict.dsai.aims.store;
+import hust.soict.dsai.aims.disc.DigitalVideoDisc;
 import java.util.ArrayList;
-public class DvDStore {	
+public class Store {	
 	private int numOfCurrentDVD = 0 ;
 	// Thuộc tính chứa số DVD có sẵn trong cửa hàng
 	ArrayList<DigitalVideoDisc> itemsInStore = new ArrayList<DigitalVideoDisc>(); 

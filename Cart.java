@@ -1,11 +1,14 @@
 import java.util.Arrays;
 import java.util.Comparator;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 public class Cart {
 	// số lượng các đơn hàng tối đa có thể ordered
 	public static final int MAX_NUMBER_ORDERED = 20;
 	// mảng chứa các dvd
 	private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc [MAX_NUMBER_ORDERED];
+	ArrayList<DigitalVideoDisc> list_items = new ArrayList<DigitalVideoDisc>(Arrays.asList(itemsOrdered));
 	// số lượng các đơn hàng trong giỏ hàng hiện tại
 	private int qtyOrdered = 0 ;
 	// tổng giá trị các đơn hàng hiện tại
@@ -151,4 +154,63 @@ public class Cart {
 	    qtyOrdered = count;
 	}
 
+	// Phương thức print - in ra màn hình theo yêu cầu
+	public void print() {
+		System.out.println("***********************CART***********************");
+		
+		for(int i = 0 ; i < list_items.size() ; i++) {
+			if(list_items.get(i) == null) {
+				list_items.remove(i);
+			}else {
+				System.out.println(list_items.get(i));
+			}
+		}
+		
+		System.out.println("Total cost: " + totalCost() + "$");
+		System.out.println("***************************************************");
+	}
+	
+	//Phương thức tìm kiếm theo ID và display the search results
+	public void searchByID() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter ID for search: ");
+		int x = sc.nextInt();
+		boolean check = false;
+		
+		for( int i = 0 ; i < list_items.size() ; i++) {	
+			if(list_items.get(i) == null) {
+				list_items.remove(i);
+			}else {
+				if(list_items.get(i).getId() == x) {
+					System.out.println(list_items.get(i));
+					check = true;
+					break;
+				}
+			}
+		}
+		if(check == false) {
+			System.out.println("No match is found");
+		}	
+	}
+	
+	// Phương thức tìm kiếm theo title
+	public void isMatchByTitle(String title) {
+		boolean check = false;
+		
+		for( int i = 0 ; i < list_items.size() ; i++) {	
+			if(list_items.get(i) == null) {
+				list_items.remove(i);
+			}else {
+				if(title.equals(list_items.get(i).getTitle())) {
+					System.out.println(list_items.get(i));
+					check = true;
+					break;
+				}
+			}
+		}
+		if(check == false) {
+			System.out.println("No match is found");
+		}	
+
+	}
 }

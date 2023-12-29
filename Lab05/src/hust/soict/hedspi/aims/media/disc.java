@@ -1,6 +1,6 @@
-package hust.soict.dsai.aims.media;
+package hust.soict.hedspi.aims.media;
 // Do Quang Phuc 20194646
-public class disc	extends Media {
+public class disc extends Media {
 	private String director ; // Thuộc tính đạo diễn
 	private int length ; // Thuộc tính độ dài CD
 	

@@ -1,6 +1,9 @@
-package hust.soict.dsai.aims.cart;
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
-import hust.soict.dsai.aims.media.Media;
+package hust.soict.hedspi.aims.cart;
+import hust.soict.hedspi.aims.media.DigitalVideoDisc;
+import hust.soict.hedspi.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +15,7 @@ public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20 ; // Thuộc tính số lượng DVD max có thể order
 
 	// Array list chứa các media
-	private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+	private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 		
 	// Phương thức thêm Media vào trong cart
 	public void addMedia(Media media_ordered) {
@@ -143,6 +146,35 @@ public class Cart {
 			System.out.println("No match is found");
 		}	
 	}
-	
+
+	public ObservableList<Media> getItemsOrdered() {
+		return (ObservableList<Media>) this.itemsOrdered;
+	}
+	// Search by id use ObservableList
+	public ObservableList<Media> Search (int id) {
+    	ObservableList<Media> found = FXCollections.observableArrayList(); // list
+    	for (Media i: itemsOrdered) { // we search through the cart
+    		if (i.getId() == id) {
+    			// if there is an item with that id, return that media
+    			found.add(i);
+    		}
+    	}
+    	// else return null
+    	return found;
+    }
+	// Search by title use ObservableList
+    public ObservableList<Media> Search (String title) {
+    	ObservableList<Media> found = FXCollections.observableArrayList(); // list
+    	for (Media i: itemsOrdered) { // we search through the cart
+    		String tmp = i.getTitle(); // a temporary string that equal to the title of considering items
+    		if (tmp.contains(title)) { 
+    			// if that string contain the considering title, add it to the found list
+    			found.add(i);
+    		}
+    		else continue;
+    	}
+    	// print the number of the matching items in the cart
+    	return found;
+    }
 	
 }

@@ -1,4 +1,4 @@
-package hust.soict.dsai.aims.media;
+package hust.soict.hedspi.aims.media;
 // Do Quang Phuc 20194646
 import java.util.Comparator;
 

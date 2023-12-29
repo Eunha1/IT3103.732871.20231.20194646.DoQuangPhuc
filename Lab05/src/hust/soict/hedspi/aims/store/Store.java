@@ -1,6 +1,8 @@
-package hust.soict.dsai.aims.store;
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
-import hust.soict.dsai.aims.media.Media;
+package hust.soict.hedspi.aims.store;
+import hust.soict.hedspi.aims.media.DigitalVideoDisc;
+import hust.soict.hedspi.aims.media.Media;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 // Do Quang Phuc  20194646
 public class Store {	
@@ -47,9 +49,9 @@ public class Store {
 	public void setnumOfCurrentMedia(int numOfCurrentMedia) {
 		this.numOfCurrentMedia = numOfCurrentMedia;
 	}
-	public ArrayList<Media> getItemsInStore() {
-		return itemsInStore;
-	}
+	public ObservableList<Media> getItemInStore(){
+    	return (ObservableList<Media>) this.itemsInStore;
+    }
 	public void setItemsInStore(ArrayList<Media> itemsInStore) {
 		this.itemsInStore = itemsInStore;
 	}

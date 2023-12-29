@@ -1,25 +1,12 @@
 // Do Quang Phuc - 20194646
-package hust.soict.dsai.aims.media;
+package hust.soict.hedspi.aims.media;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class book extends Media{
-	// private int id ; // Thuoc tinh id cua book
-	// private String title; // thuoc tinh title cua book
-	// private String category; // thuoc tinh category cua book
-	// private float cost; // thuoc tinh cost cua book
-	private List<String> authors = new ArrayList<String>(); // ArrayList
-	 
-	// Constructor by id , title , category , cost , authors
-	// public book(int id,String title ,String category ,float cost ,List<String> authors) {
-	//	 this.id = id;
-	//	 this.title = title;
-	//	 this.category = category;
-	//	 this.cost = cost;
-	//	 this.authors = authors;
-	// }
-	 
+	 private List<String> authors = new ArrayList<String>(); // ArrayList
+	 private String author;
 	 // Contructor default
 	 public book () {
 		 // TODO Auto-generated constructor stub
@@ -28,11 +15,16 @@ public class book extends Media{
 	 public book(int id , String title , String category , float cost ,List<String> authors) {
 			super(id , title , category , cost);
 			this.authors = authors;
-		}
+	}
+	 // contructor title, category, cost , author
+	 public book(String title , String category , float cost ,String authors) {
+			super(title , category , cost);
+			this.author = authors;
+	}
 	 // contructor by title
 	 public book(String title) {
 			super(title);
-		}
+	}
 	// Getter and Setter of Authors
 	public List<String> getAuthors() {
 		return authors;
